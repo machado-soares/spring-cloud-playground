@@ -1,0 +1,42 @@
+
+spring:
+  main:
+    banner-mode: OFF
+  cloud:
+    function:
+      definition: log;processor;personProcessor;personListener;pingProcessor
+    stream:
+
+      function:
+        bindings:
+          log-in-0: consumer
+          personListener-in-0: person-consumer
+          processor-in-0: processor-in
+          processor-out-0: processor-out
+          personProcessor-in-0: person-processor-in
+          personProcessor-out-0: person-processor-out
+          pingProcessor-in-0: ping-processor-in
+          pingProcessor-out-0: ping-processor-out
+      bindings:
+        processor-out:
+          destination: consumer
+        person-processor-out:
+          destination: person-consumer
+        ping-processor-out:
+          destination: pong-processor-in
+          consumer:
+            maxAttempts: 0
+        ping-processor-in:
+          consumer:
+            maxAttempts: 0
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+    com.example.demo:
+      DemoApplication: INFO
+      listeners.*: INFO
+      processors.*: INFO

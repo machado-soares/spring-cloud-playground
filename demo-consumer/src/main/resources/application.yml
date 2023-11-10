@@ -1,0 +1,32 @@
+
+spring:
+  main:
+    banner-mode: OFF
+  cloud:
+    function:
+      definition: log;personListener;pongProcessor
+    stream:
+      function:
+        bindings:
+          log-in-0: consumer
+          personListener-in-0: person-consumer
+          pongProcessor-in-0: pong-processor-in
+          pongProcessor-out-0: pong-processor-out
+      bindings:
+        pong-processor-out:
+          destination: ping-processor-in
+          consumer:
+            maxAttempts: 0
+        pong-processor-in:
+          consumer:
+            maxAttempts: 0
+server:
+  port: 8081
+
+logging:
+  level:
+    root: INFO
+    com.example.demo:
+      DemoApplication: INFO
+      listeners.*: INFO
+      processors.*: INFO
