@@ -23,12 +23,21 @@ spring:
         person-processor-out:
           destination: person-consumer
         ping-processor-out:
+          group: test2
           destination: pong-processor-in
           consumer:
             maxAttempts: 0
         ping-processor-in:
           consumer:
             maxAttempts: 0
+        consumer:
+          group: test1
+        person-consumer:
+          group: test1
+        person-processor-in:
+          group: test1
+        processor-in:
+          group: test
 
 server:
   port: 8080

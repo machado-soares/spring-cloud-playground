@@ -18,8 +18,13 @@ spring:
           consumer:
             maxAttempts: 0
         pong-processor-in:
+          group: test2
           consumer:
             maxAttempts: 0
+        person-consumer:
+          group: test1
+        consumer:
+          group: test1
 server:
   port: 8081
 
