@@ -28,6 +28,7 @@ spring:
           consumer:
             maxAttempts: 0
         ping-processor-in:
+          group: test2
           consumer:
             maxAttempts: 0
         consumer:
